@@ -1,0 +1,73 @@
+<procEventoCTe versao="3.00" xmlns="http://www.portalfiscal.inf.br/cte">
+<eventoCTe versao="3.00" xmlns="http://www.portalfiscal.inf.br/cte">
+<infEvento Id="ID2401503521012345678901234557000000011223344556611101">
+<cOrgao>
+35</cOrgao>
+<chCTe>35210123456789012345570000000112233445566111</chCTe>
+<dhEvento>
+2021-09-13T08:49:58-03:00</dhEvento>
+<tpEvento>
+240150</tpEvento>
+<nSeqEvento>
+01</nSeqEvento>
+<detEvento versaoEvento="3.00">
+<evCTeAnulado>
+<descEvento>
+CT-e Anulado</descEvento>
+<chCTeAnulacao>35210123456789012345570000000112233445566333</chCTeAnulacao>
+<dhRecbto>
+2021-09-13T08:49:58-03:00</dhRecbto>
+</evCTeAnulado>
+</detEvento>
+</infEvento>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="#ID2401503521012345678901234557000000011223344556611101">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>
+z7GiJABWeAGdMLhXndPc3b2v59M=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>
+hgVFVZSF5Sy6piXSm/VE35y9RxL9WOSkQ==</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509Certificate>
+MIIH7TCCBEDAqAeBBxIRQprrMmIb0=</X509Certificate>
+</X509Data>
+</KeyInfo>
+</Signature>
+</eventoCTe>
+<retEventoCTe versao="3.00">
+<infEvento>
+<tpAmb>
+1</tpAmb>
+<verAplic>
+SP-CTe-2021-08-19-1</verAplic>
+<cOrgao>
+35</cOrgao>
+<cStat>
+135</cStat>
+<xMotivo>
+Evento registrado e vinculado a CT-e</xMotivo>
+<chCTe>
+35210123456789012345570000000112233445566111</chCTe>
+<tpEvento>
+240150</tpEvento>
+<xEvento>
+CT-e Anulado</xEvento>
+<nSeqEvento>
+01</nSeqEvento>
+<dhRegEvento>
+2021-09-13T08:49:58-03:00</dhRegEvento>
+<nProt>
+123456789</nProt>
+</infEvento>
+</retEventoCTe>
+</procEventoCTe>

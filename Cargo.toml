@@ -1,0 +1,30 @@
+[package]
+authors = ["Claudio FSR <claudiofsrodrigues@gmail.com>"]
+rust-version = "1.80"
+name = "b_encontrar_todas_as_nfes_do_cte"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+execution-time = "0.2"
+rayon = "1.10"
+regex = "1.11"
+thiserror = "2.0"
+walkdir = "2.5"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[profile.release]
+# https://doc.rust-lang.org/cargo/reference/profiles.html
+debug = true            # Debug info at all.
+strip = "symbols"       # Strip symbols from a binary.
+opt-level = 3           # All optimizations.
+overflow-checks = true  # Panic will occur on overflow.
+lto = true              # Enable link time optimization.
+codegen-units = 1       # Use a single codegen for size optimization.
+panic = "abort"         # Remove traceback information.
+incremental = true      # Save information to disk, improving re-compile times.
+
+[profile.dev]
+opt-level = 1           # Use slightly better optimizations.

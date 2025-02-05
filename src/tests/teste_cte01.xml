@@ -1,0 +1,66 @@
+<cteProc versao="3.00" xmlns="http://www.portalfiscal.inf.br/cte">
+<CTe xmlns="http://www.portalfiscal.inf.br/cte">
+<infCte Id="CTe35210123456789012345570000000112233445566777" versao="3.00">
+<ide>
+<infDoc>
+<infNFe>
+<chave>
+35210123456789012345550000000112233445555555</chave>
+</infNFe>
+</infDoc>
+<infModal versaoModal="3.00">
+<rodo>
+<RNTRC>
+0123456789</RNTRC>
+</rodo>
+</infModal>
+<infCteSub>
+<chCte>
+35210123456789012345570000000112233445566999</chCte>
+<refCteAnu>
+35210123456789012345570000000112233445566888</refCteAnu>
+</infCteSub>
+</ide>
+</infCte>
+<infCTeSupl>
+</infCTeSupl>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+<Reference URI="#CTe35210123456789012345570000000112233445566777">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<DigestValue>
+y9Tcm6kj8Uio2f2+BcQzrpJLQaQ=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>
+dQFU45UcXZpjVf8yqw08eqXy2CwTBRk
+</SignatureValue>
+</Signature>
+</CTe>
+<protCTe versao="3.00">
+<infProt>
+<tpAmb>
+1</tpAmb>
+<verAplic>
+SP-CTe-2021-08-19</verAplic>
+<chCTe>
+35210123456789012345570000000112233445566777</chCTe>
+<dhRecbto>
+2021-09-13T18:49:48-03:00</dhRecbto>
+<nProt>
+001122334455</nProt>
+<digVal>
+y9Tcm6kj8Uio2f2+BcQzrpJLQaQ=</digVal>
+<cStat>
+100</cStat>
+<xMotivo>
+Autorizado o uso do CT-e</xMotivo>
+</infProt>
+</protCTe>
+</cteProc>
