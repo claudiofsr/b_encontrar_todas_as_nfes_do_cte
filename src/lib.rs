@@ -92,10 +92,10 @@ pub fn get_filtered_files(
 Reads the entire content of a file into a String.
 
 1. impl AsRef<Path>: `slurp` aceita qualquer tipo que implemente AsRef<Path>, o que inclui:
-    &Path,
-    &str,
-    String e
-    PathBuf, entre outros.
+   &Path,
+   &str,
+   String e
+   PathBuf, entre outros.
 
 2. path.as_ref(): Converte o parâmetro de entrada para &Path
 
