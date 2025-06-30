@@ -50,7 +50,7 @@ impl Config {
             version = &self.version,
         );
 
-        println!("{}", msg);
+        println!("{msg}");
     }
 
     pub fn get_num_files(&mut self, files: &[PathBuf]) -> Result<(), MyError> {
