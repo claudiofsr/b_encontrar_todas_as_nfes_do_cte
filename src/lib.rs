@@ -5,7 +5,7 @@ mod reg_ex;
 use std::{
     collections::{BTreeMap, BTreeSet, HashMap, HashSet},
     fs,
-    io::{self, Write},
+    io::Write,
     path::{Path, PathBuf},
     sync::LazyLock,
 };
@@ -14,7 +14,11 @@ use rayon::prelude::*;
 use regex::Regex;
 use walkdir::{DirEntry, WalkDir};
 
-pub use self::{config::Config, error::MyError, reg_ex::*};
+pub use self::{
+    config::Config,
+    error::{MyError, MyResult},
+    reg_ex::*,
+};
 
 const CODE_NFE: &str = "55";
 const CODE_CTE: &str = "57";
@@ -31,7 +35,7 @@ const NUM_DIGITS: usize = 44;
 /// # Returns
 ///
 /// A `Result` containing a `Vec<DirEntry>` if successful or an `io::Error` if an error occurs.
-pub fn get_walkdir_entries(file_format: &str) -> Result<Vec<DirEntry>, io::Error> {
+pub fn get_walkdir_entries(file_format: &str) -> MyResult<Vec<DirEntry>> {
     let dir_path: PathBuf = std::env::current_dir()?;
 
     let entries: Vec<DirEntry> = WalkDir::new(dir_path)
@@ -69,23 +73,23 @@ pub fn get_filtered_files(
     regex: &LazyLock<Regex>,
 ) -> Result<Vec<PathBuf>, MyError> {
     xml_entries
-        .into_par_iter() // rayon parallel iterator
-        .filter_map(|entry| {
-            let xml_path = entry.path();
+        .into_par_iter()
+        .map(|entry: &DirEntry| {
+            let xml_path: PathBuf = entry.path().to_path_buf();
 
             // Reads the entire contents of a file into a string.
-            match fs::read_to_string(xml_path) {
-                Ok(contents) => {
+            fs::read_to_string(&xml_path)
+                .map_err(|error| MyError::FileReadError(xml_path.clone(), error))
+                .map(|contents| {
                     if regex.is_match(&contents) {
-                        Some(Ok(xml_path.to_path_buf()))
+                        Some(xml_path)
                     } else {
                         None
                     }
-                }
-                Err(error) => Some(Err(MyError::FileReadError(xml_path.to_path_buf(), error))),
-            }
+                })
         })
-        .collect()
+        .collect::<Result<Vec<Option<PathBuf>>, MyError>>() // Coleta os resultados de cada thread, agrupando erros
+        .map(|options| options.into_iter().flatten().collect()) // Filtra os None e coleta os Some(PathBuf)
 }
 
 /**

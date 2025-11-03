@@ -1,6 +1,8 @@
 use std::{io, path::PathBuf};
 use thiserror::Error;
 
+pub type MyResult<T> = Result<T, MyError>;
+
 #[derive(Debug, Error)]
 pub enum MyError {
     #[error("Could not open <{0}> for reading: {1}")]

@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 execution-time = "0.3"
 rayon = "1.11"
-regex = "1.11"
+regex = "1.12"
 thiserror = "2.0"
 walkdir = "2.5"
 
