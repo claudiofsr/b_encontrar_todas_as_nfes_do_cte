@@ -12,7 +12,7 @@ cargo b -r && cargo install --path=.
 cargo test -- --show-output read_xml_content
 */
 
-fn main() -> Result<(), MyError> {
+fn main() -> MyResult<()> {
     let timer = ExecutionTime::start();
 
     let mut config = Config::new();

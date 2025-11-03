@@ -71,7 +71,7 @@ pub fn get_walkdir_entries(file_format: &str) -> MyResult<Vec<DirEntry>> {
 pub fn get_filtered_files(
     xml_entries: &[DirEntry],
     regex: &LazyLock<Regex>,
-) -> Result<Vec<PathBuf>, MyError> {
+) -> MyResult<Vec<PathBuf>> {
     xml_entries
         .into_par_iter()
         .map(|entry: &DirEntry| {
@@ -107,7 +107,7 @@ Reads the entire content of a file into a String.
 
 4. map_err: A função continua usando map_err para transformar um io::Error em um MyError::FileReadError com o PathBuf correto.
 */
-fn slurp(path: impl AsRef<Path>) -> Result<String, MyError> {
+fn slurp(path: impl AsRef<Path>) -> MyResult<String> {
     fs::read_to_string(path.as_ref()).map_err(|err| {
         let path_buf = path.as_ref().to_path_buf();
         MyError::FileReadError(path_buf, err)
@@ -129,11 +129,7 @@ fn slurp(path: impl AsRef<Path>) -> Result<String, MyError> {
 /// # Returns
 ///
 /// `Ok(true)` if the key is valid, or an `Err(MyError::InvalidFiscalKey)` if the key is invalid.
-fn verify_key_code(
-    path: impl AsRef<Path>,
-    key: &str,
-    expected_code: &str,
-) -> Result<bool, MyError> {
+fn verify_key_code(path: impl AsRef<Path>, key: &str, expected_code: &str) -> MyResult<bool> {
     let key_numeric = REGEX_NOT_NUMERIC.replace_all(key, "");
 
     let code: &str = REGEX_CODE
@@ -168,7 +164,7 @@ type CteInfo = (HashSet<String>, HashMap<String, HashSet<String>>);
 ///
 /// A `Result` containing a tuple of `HashSet<String>` for "chave_cte" keys and `HashMap<String, HashSet<String>>`
 /// for complementary "cte" keys if successful or a `MyError` if an error occurs.
-pub fn extract_info_from_xml(file_path: &PathBuf) -> Result<CteInfo, MyError> {
+pub fn extract_info_from_xml(file_path: &PathBuf) -> MyResult<CteInfo> {
     let content: String = slurp(file_path)?;
     let all_data = REGEX_REMOVE_NEWLINES_OR_SPACES.replace_all(&content, "");
 
@@ -289,10 +285,7 @@ pub fn fold_reduce(array_of_files: &[PathBuf]) -> MapCteComp {
 /// # Returns
 ///
 /// A `Result` that is `Ok(())` if the printing succeeds or `MyError` if an error occurs.
-pub fn print_output(
-    complementary_key_for_cte: &MapCteComp,
-    config: &Config,
-) -> Result<(), MyError> {
+pub fn print_output(complementary_key_for_cte: &MapCteComp, config: &Config) -> MyResult<()> {
     let mut output_file = fs::File::create(&config.output_filename)
         .map_err(|e| MyError::FileWriteError(config.output_filename.clone(), e))?;
 
