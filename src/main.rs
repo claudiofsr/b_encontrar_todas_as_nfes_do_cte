@@ -1,5 +1,5 @@
 use execution_time::ExecutionTime;
-use std::path::PathBuf;
+use std::{path::PathBuf, process};
 use walkdir::DirEntry;
 
 use b_encontrar_todas_as_nfes_do_cte::*;
@@ -12,7 +12,15 @@ cargo b -r && cargo install --path=.
 cargo test -- --show-output read_xml_content
 */
 
-fn main() -> MyResult<()> {
+fn main() {
+    // Chama a função 'run' e lida com o resultado
+    if let Err(e) = run() {
+        eprintln!("Error: {}", e); // Imprime a mensagem de erro formatada
+        process::exit(1); // Sai com um código de erro diferente de zero
+    }
+}
+
+fn run() -> MyResult<()> {
     let timer = ExecutionTime::start();
 
     let mut config = Config::new();
