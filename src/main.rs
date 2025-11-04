@@ -13,10 +13,20 @@ cargo test -- --show-output read_xml_content
 */
 
 fn main() {
-    // Chama a função 'run' e lida com o resultado
-    if let Err(e) = run() {
-        eprintln!("Error: {}", e); // Imprime a mensagem de erro formatada
-        process::exit(1); // Sai com um código de erro diferente de zero
+    // Call the separate function that contains the main logic and can return Result
+    let run_result = run();
+
+    // Now handle the result returned by the 'run' function
+    match run_result {
+        Ok(_) => {
+            println!("All requested operations finished.");
+            process::exit(0); // Explicitly exit with success code
+        }
+        Err(error) => {
+            eprintln!("Operation failed:");
+            eprintln!("Error: {}", error); // Using Display prints the #[error] message
+            process::exit(1); // Explicitly exit with failure code
+        }
     }
 }
 
