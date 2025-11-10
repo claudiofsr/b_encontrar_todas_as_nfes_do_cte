@@ -130,7 +130,7 @@ fn slurp(path: impl AsRef<Path>) -> MyResult<String> {
 ///
 /// `Ok(true)` if the key is valid, or an `Err(MyError::InvalidFiscalKey)` if the key is invalid.
 fn verify_key_code(path: impl AsRef<Path>, key: &str, expected_code: &str) -> MyResult<bool> {
-    let key_numeric = REGEX_NOT_NUMERIC.replace_all(key, "");
+    let key_numeric = REGEX_REMOVE_NON_DIGITS.replace_all(key, "");
 
     let code: &str = REGEX_CODE
         .captures(&key_numeric)

@@ -103,7 +103,7 @@ pub static REGEX_REMOVE_NEWLINES_OR_SPACES: Lazy<Regex> = Lazy::new(|| {
     .unwrap()
 });
 
-pub static REGEX_NOT_NUMERIC: Lazy<Regex> = Lazy::new(|| {
+pub static REGEX_REMOVE_NON_DIGITS: Lazy<Regex> = Lazy::new(|| {
     Regex::new(
         r"(?isx)
         \D
